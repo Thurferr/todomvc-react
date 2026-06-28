@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 
 export function Input({ onSubmit, placeholder, label, defaultValue, onBlur, editing = false }) {
     const handleBlur = useCallback(
