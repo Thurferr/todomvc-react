@@ -23,13 +23,8 @@ module.exports = {
   collectCoverage: true,
 
   collectCoverageFrom: [
-    "src/**/*.{js,jsx}",
-
-    "!src/index.js",
-    "!src/**/*.test.{js,jsx}",
-    "!src/**/*.spec.{js,jsx}",
-    "!src/**/__tests__/**",
-  ],
+    "src/**/*.{js,jsx,ts,tsx}"
+],
 
   coveragePathIgnorePatterns: [
     "/node_modules/",
