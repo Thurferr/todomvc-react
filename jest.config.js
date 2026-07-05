@@ -1,6 +1,9 @@
 module.exports = {
   testEnvironment: "jsdom",
 
+  // garante que o Jest só olha o código da aplicação
+  roots: ["<rootDir>/src"],
+
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
 
   transform: {
@@ -15,11 +18,18 @@ module.exports = {
 
   collectCoverageFrom: [
     "src/**/*.{js,jsx}",
+
+    // entry point fora da cobertura
     "!src/index.js",
+
+    // testes
     "!src/**/*.test.{js,jsx}",
     "!src/**/*.spec.{js,jsx}",
     "!src/**/tests/**",
-],
+
+    // segurança extra (evita pegar arquivos fora do src via glob)
+    "!**/node_modules/**",
+  ],
 
   coveragePathIgnorePatterns: [
     "/node_modules/",
@@ -28,7 +38,7 @@ module.exports = {
     "/cypress/",
     "/webpack.*",
     "/jest.*",
-    "/babel.*"
+    "/babel.*",
   ],
 
   coverageReporters: ["text", "lcov", "html"],
