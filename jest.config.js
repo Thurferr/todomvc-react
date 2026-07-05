@@ -1,9 +1,6 @@
 module.exports = {
   testEnvironment: "jsdom",
 
-  // garante que o Jest só olha o código da aplicação
-  roots: ["<rootDir>/src"],
-
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
 
   transform: {
@@ -14,21 +11,24 @@ module.exports = {
     "\\.(css|less|scss)$": "identity-obj-proxy",
   },
 
+  // 👇 ESSENCIAL: não restringir para src
+  roots: ["<rootDir>"],
+
+  // 👇 garantir descoberta dos testes
+  testMatch: [
+    "**/tests/**/*.test.{js,jsx,ts,tsx}",
+    "**/?(*.)+(spec|test).{js,jsx,ts,tsx}",
+  ],
+
   collectCoverage: true,
 
   collectCoverageFrom: [
     "src/**/*.{js,jsx}",
 
-    // entry point fora da cobertura
     "!src/index.js",
-
-    // testes
     "!src/**/*.test.{js,jsx}",
     "!src/**/*.spec.{js,jsx}",
-    "!src/**/tests/**",
-
-    // segurança extra (evita pegar arquivos fora do src via glob)
-    "!**/node_modules/**",
+    "!src/**/__tests__/**",
   ],
 
   coveragePathIgnorePatterns: [
