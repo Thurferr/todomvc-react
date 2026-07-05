@@ -1,41 +1,64 @@
 import React, { useCallback } from "react";
+import PropTypes from "prop-types";
 
-export function Input({ onSubmit, placeholder, label, defaultValue, onBlur, editing = false }) {
-    const handleBlur = useCallback(
-        (e) => {
-            if (!onBlur) return;
-            const value = e.target.value.trim();
-            onBlur(value);
-        },
-        [onBlur]
-    );
+export function Input({
+  onSubmit,
+  placeholder,
+  label,
+  defaultValue,
+  onBlur,
+  editing = false,
+}) {
+  const handleBlur = useCallback(
+    (e) => {
+      if (!onBlur) return;
 
-    const handleKeyDown = useCallback(
-        (e) => {
-            if (e.key !== "Enter") return;
-            const value = e.target.value.trim();
-            // For new-todo, ignore empty submits. For edit, an empty
-            // submit means "delete this todo" — let the parent decide.
-            if (!editing && value.length === 0) return;
-            onSubmit(value);
-            // Only clear the new-todo input on submit; the edit input is
-            // about to unmount so leave it alone.
-            if (!editing) e.target.value = "";
-        },
-        [onSubmit, editing]
-    );
+      const value = e.target.value.trim();
+      onBlur(value);
+    },
+    [onBlur]
+  );
 
-    return (
-        <input
-            className={editing ? "edit" : "new-todo"}
-            type="text"
-            data-testid="text-input"
-            autoFocus
-            aria-label={label}
-            placeholder={placeholder}
-            defaultValue={defaultValue}
-            onBlur={handleBlur}
-            onKeyDown={handleKeyDown}
-        />
-    );
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (e.key !== "Enter") return;
+      if (!onSubmit) return;
+
+      const value = e.target.value.trim();
+
+      // Para novo todo: não aceita vazio
+      if (!editing && value.length === 0) return;
+
+      onSubmit(value);
+
+      // limpa apenas no modo criação
+      if (!editing) {
+        e.target.value = "";
+      }
+    },
+    [onSubmit, editing]
+  );
+
+  return (
+    <input
+      className={editing ? "edit" : "new-todo"}
+      type="text"
+      data-testid="text-input"
+      autoFocus
+      aria-label={label}
+      placeholder={placeholder}
+      defaultValue={defaultValue}
+      onBlur={handleBlur}
+      onKeyDown={handleKeyDown}
+    />
+  );
 }
+
+Input.propTypes = {
+  onSubmit: PropTypes.func,
+  placeholder: PropTypes.string,
+  label: PropTypes.string,
+  defaultValue: PropTypes.string,
+  onBlur: PropTypes.func,
+  editing: PropTypes.bool,
+};
