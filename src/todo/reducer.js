@@ -40,7 +40,7 @@ export const todoReducer = (state, action) => {
 
     case TOGGLE_ALL:
       return state.map((todo) =>
-        todo.completed !== action.payload.completed
+        todo.completed === action.payload.completed
           ? { ...todo, completed: action.payload.completed }
           : todo
       );
@@ -49,6 +49,6 @@ export const todoReducer = (state, action) => {
       return state.filter((todo) => !todo.completed);
 
     default:
-      throw Error(`Unknown action: ${action.type}`);
+      throw new Error(`Unknown action: ${action.type}`);
   }
 };
