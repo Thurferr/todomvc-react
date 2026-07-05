@@ -10,4 +10,23 @@ module.exports = {
   moduleNameMapper: {
     "\\.(css|less|scss)$": "identity-obj-proxy",
   },
+
+  collectCoverage: true,
+
+  collectCoverageFrom: [
+    "src/**/*.{js,jsx}",
+    "!src/index.js",
+  ],
+
+  coveragePathIgnorePatterns: [
+    "/node_modules/",
+    "/dist/",
+    "/coverage/",
+    "/cypress/",
+    "/webpack.*",
+    "/jest.*",
+    "/babel.*"
+  ],
+
+  coverageReporters: ["text", "lcov", "html"],
 };
