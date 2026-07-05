@@ -1,0 +1,7 @@
+services:
+  frontend:
+    build: .
+    container_name: todomvc-react
+    ports:
+      - "7002:80"
+    restart: unless-stopped
