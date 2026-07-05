@@ -16,7 +16,10 @@ module.exports = {
   collectCoverageFrom: [
     "src/**/*.{js,jsx}",
     "!src/index.js",
-  ],
+    "!src/**/*.test.{js,jsx}",
+    "!src/**/*.spec.{js,jsx}",
+    "!src/**/tests/**",
+],
 
   coveragePathIgnorePatterns: [
     "/node_modules/",
