@@ -26,7 +26,7 @@ describe('Main', () => {
 
     renderWithRoute(<Main todos={todos} dispatch={() => {}} />, '/');
 
-    expect(screen.getByTestId('todo-list').children.length).toBe(2);
+    expect(screen.getByTestId('todo-list').children).toHaveLength(2);
   });
 
   it('filtra apenas ativos na rota /active', () => {
@@ -38,7 +38,7 @@ describe('Main', () => {
     renderWithRoute(<Main todos={todos} dispatch={() => {}} />, '/active');
 
     const list = screen.getByTestId('todo-list');
-    expect(list.children.length).toBe(1);
+    expect(list.children).toHaveLength(1);
   });
 
   it('filtra apenas completos na rota /completed', () => {
@@ -50,7 +50,7 @@ describe('Main', () => {
     renderWithRoute(<Main todos={todos} dispatch={() => {}} />, '/completed');
 
     const list = screen.getByTestId('todo-list');
-    expect(list.children.length).toBe(1);
+    expect(list.children).toHaveLength(1);
   });
 
   it('renderiza checkbox toggle-all', () => {

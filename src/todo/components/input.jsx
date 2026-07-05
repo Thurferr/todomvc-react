@@ -26,7 +26,6 @@ export function Input({
 
       const value = e.target.value.trim();
 
-      // Para novo todo: não aceita vazio
       if (!editing && value.length === 0) return;
 
       onSubmit(value);
