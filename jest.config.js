@@ -23,6 +23,7 @@ module.exports = {
   collectCoverageFrom: [
     "src/**/*.{js,jsx,ts,tsx}",
 
+    "!src/index.js",
     "!babel.config.js",
     "!jest.config.js",
     "!jest.setup.js",
