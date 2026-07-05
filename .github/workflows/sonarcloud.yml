@@ -20,7 +20,7 @@ jobs:
           node-version: 20
           cache: npm
 
-      - run: npm ci --ignore-script
+      - run: npm ci --ignore-scripts
 
       - name: Executar testes com cobertura
         run: npm test -- --coverage
