@@ -11,10 +11,8 @@ module.exports = {
     "\\.(css|less|scss)$": "identity-obj-proxy",
   },
 
-  // 👇 ESSENCIAL: não restringir para src
   roots: ["<rootDir>"],
 
-  // 👇 garantir descoberta dos testes
   testMatch: [
     "**/tests/**/*.test.{js,jsx,ts,tsx}",
     "**/?(*.)+(spec|test).{js,jsx,ts,tsx}",
@@ -23,17 +21,15 @@ module.exports = {
   collectCoverage: true,
 
   collectCoverageFrom: [
-    "src/**/*.{js,jsx,ts,tsx}"
-],
+    "src/**/*.{js,jsx,ts,tsx}",
 
-  coveragePathIgnorePatterns: [
-    "/node_modules/",
-    "/dist/",
-    "/coverage/",
-    "/cypress/",
-    "/webpack.*",
-    "/jest.*",
-    "/babel.*",
+    "!babel.config.js",
+    "!jest.config.js",
+    "!jest.setup.js",
+    "!cypress.config.js",
+    "!webpack.common.js",
+    "!webpack.dev.js",
+    "!webpack.prod.js",
   ],
 
   coverageReporters: ["text", "lcov", "html"],
