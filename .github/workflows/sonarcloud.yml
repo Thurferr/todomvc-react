@@ -22,8 +22,13 @@ jobs:
 
       - run: npm ci --ignore-scripts
 
-      - name: Executar testes com cobertura
-        run: npm test -- --coverage --watchAll=false
+      - name: Clean coverage & cache
+        run: |
+          rm -rf coverage
+          npx jest --clearCache || true
+
+      - name: Run tests with coverage
+        run: npm test -- --coverage --watchAll=false --no-cache
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@4006f663ecaf1f8093e8e4abb9227f6041f52216
@@ -35,5 +40,6 @@ jobs:
             -Dsonar.projectKey=Thurferr_todomvc-react
             -Dsonar.organization=thurferr
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-            -Dsonar.exclusions=coverage/**,dist/**,node_modules/**,cypress/**
-            -Dsonar.cpd.exclusions=coverage/**
+            -Dsonar.sources=src
+            -Dsonar.exclusions=**/node_modules/**,**/cypress/**,**/dist/**,**/*.test.*,**/*.spec.*,**/coverage/**
+            -Dsonar.coverage.exclusions=**/babel.config.js,**/jest.config.js,**/jest.setup.js,**/cypress.config.js,**/webpack*.js
