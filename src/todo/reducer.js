@@ -6,7 +6,7 @@ import {
   TOGGLE_ITEM,
   REMOVE_ALL_ITEMS,
   TOGGLE_ALL,
-  REMOVE_COMPLETED_ITEMS
+  REMOVE_COMPLETED_ITEMS,
 } from "./constants";
 
 export const todoReducer = (state, action) => {
@@ -15,7 +15,7 @@ export const todoReducer = (state, action) => {
       return state.concat({
         id: nanoid(),
         title: action.payload.title,
-        completed: false
+        completed: false,
       });
 
     case UPDATE_ITEM:
@@ -39,11 +39,10 @@ export const todoReducer = (state, action) => {
       return [];
 
     case TOGGLE_ALL:
-      return state.map((todo) =>
-        todo.completed === action.payload.completed
-          ? { ...todo, completed: action.payload.completed }
-          : todo
-      );
+      return state.map((todo) => ({
+        ...todo,
+        completed: action.payload.completed,
+      }));
 
     case REMOVE_COMPLETED_ITEMS:
       return state.filter((todo) => !todo.completed);
